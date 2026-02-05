@@ -93,14 +93,14 @@ function startLove(){
   msg.style.alignItems = "center";
   msg.style.textAlign = "center";
 
-  // Name abfragen
-  let name = prompt("Wie heißt dein Schatziiiiiiii? 💖");
-  if(!name) name = "Kubi";
+  // Name vom Benutzer abfragen
+  let name = prompt("Wie heißt du? 💖");
+  if(!name) name = "du"; // Falls nichts eingegeben wird
 
   // personalisierte Nachricht
   const text = `💖 JAAAA! ${name}, du bist mein Valentinstag 😍💘`;
 
-  // WhatsApp-Link (keine Nummer nötig)
+  // WhatsApp-Link (ohne Nummer)
   const waLink = "https://wa.me/?text=" + encodeURIComponent(text);
 
   msg.innerHTML = `
@@ -133,6 +133,7 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
 
