@@ -3,7 +3,19 @@ const no = document.getElementById("no");
 const texts = ["NEIN 😳","Fast 😏","Elif bitte 😭","Nope 💔","Nice try 😜"];
 let n = 0;
 
-function flee(e){
+function createHeart(x, y) {
+  const h = document.createElement("div");
+  h.className = "float";
+  h.textContent = "💖";
+  h.style.left = x + "px";
+  h.style.top = y + "px";
+  h.style.fontSize = Math.random() * 20 + 15 + "px";
+  h.style.animationDuration = Math.random() * 2 + 2 + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 3000);
+}
+
+function flee(e) {
   const padding = 20;
   const btnWidth = no.offsetWidth;
   const btnHeight = no.offsetHeight;
@@ -11,8 +23,8 @@ function flee(e){
   const maxY = window.innerHeight - btnHeight - padding;
 
   // Maus-/Fingerposition
-  let cursorX = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth/2;
-  let cursorY = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight/2;
+  let cursorX = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth / 2;
+  let cursorY = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight / 2;
 
   // Neue Position: mindestens 150px vom Cursor entfernt
   let x, y;
@@ -25,14 +37,19 @@ function flee(e){
 
   no.textContent = texts[n++ % texts.length];
 
-  // sanftes Verschieben + Hopser
+  // sanftes Verschieben + Zittern
   no.style.transition = "all 0.2s ease";
   no.style.left = x + "px";
-  no.style.top  = y + "px";
-
-  // leichter „Zittern“-Effekt
-  no.style.transform = `scale(1.1) rotate(${Math.random()*20-10}deg)`;
+  no.style.top = y + "px";
+  no.style.transform = `scale(1.1) rotate(${Math.random() * 20 - 10}deg)`;
   setTimeout(() => no.style.transform = "scale(1) rotate(0deg)", 150);
+
+  // Herzen um den Button erzeugen
+  for (let i = 0; i < 5; i++) {
+    const offsetX = Math.random() * btnWidth - btnWidth / 2;
+    const offsetY = Math.random() * btnHeight - btnHeight / 2;
+    createHeart(x + btnWidth / 2 + offsetX, y + btnHeight / 2 + offsetY);
+  }
 }
 
 // Events: Click + Touch
@@ -138,6 +155,7 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
 
