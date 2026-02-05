@@ -98,7 +98,7 @@ function startLove(){
   if(!name) name = "du"; // Falls nichts eingegeben wird
 
   // personalisierte Nachricht
-  const text = `💖 JAAAA! ${name}, du bist mein Valentinstag 😍💘`;
+  const text = `💖 JAAAA! ${name}, ist dein Valentinstag, die Allerschönste Frau der Welt! 😍💘`;
 
   // WhatsApp-Link (ohne Nummer)
   const waLink = "https://wa.me/?text=" + encodeURIComponent(text);
@@ -133,6 +133,7 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
 
