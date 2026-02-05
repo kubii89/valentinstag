@@ -7,7 +7,6 @@ function flee(e){
   const padding = 20;
   const btnWidth = no.offsetWidth;
   const btnHeight = no.offsetHeight;
-
   const maxX = window.innerWidth - btnWidth - padding;
   const maxY = window.innerHeight - btnHeight - padding;
 
@@ -15,27 +14,33 @@ function flee(e){
   let cursorX = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth/2;
   let cursorY = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight/2;
 
-  // neue Position, mindestens 100px vom Cursor entfernt
+  // Neue Position: mindestens 150px vom Cursor entfernt
   let x, y;
   let tries = 0;
   do {
     x = Math.random() * maxX;
     y = Math.random() * maxY;
     tries++;
-  } while (Math.hypot(x - cursorX, y - cursorY) < 100 && tries < 100);
+  } while (Math.hypot(x - cursorX, y - cursorY) < 150 && tries < 100);
 
   no.textContent = texts[n++ % texts.length];
 
   // sanftes Verschieben + Hopser
-  no.style.transition = "all 0.3s ease";
+  no.style.transition = "all 0.2s ease";
   no.style.left = x + "px";
   no.style.top  = y + "px";
-  no.style.transform = "scale(1.2)";
-  setTimeout(() => no.style.transform = "scale(1)", 150);
+
+  // leichter „Zittern“-Effekt
+  no.style.transform = `scale(1.1) rotate(${Math.random()*20-10}deg)`;
+  setTimeout(() => no.style.transform = "scale(1) rotate(0deg)", 150);
 }
 
+// Events: Click + Touch
 no.addEventListener("click", flee);
 no.addEventListener("touchstart", e => { e.preventDefault(); flee(e); });
+
+// Optional: Button springt auch, wenn Maus sich nähert
+document.addEventListener("mousemove", flee);
 
 /* ===== Hintergrund-Herzen ===== */
 setInterval(()=>{
@@ -133,6 +138,7 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
 
