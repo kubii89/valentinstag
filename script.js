@@ -60,16 +60,24 @@ no.addEventListener("touchstart", e => { e.preventDefault(); flee(e); });
 document.addEventListener("mousemove", flee);
 //Countdown für Valentinstag
 const countdownElement = document.getElementById('countdown');
-const valentinstag = new Date(new Date().getFullYear(), 1, 14);
+
+function getNextValentinstag() {
+    const now = new Date();
+    let year = now.getFullYear();
+    let valentinstag = new Date(year, 1, 14, 0, 0, 0); // Februar = 1
+
+    if (valentinstag < now) {
+        year += 1;
+        valentinstag = new Date(year, 1, 14, 0, 0, 0);
+    }
+
+    return valentinstag;
+}
 
 function updateCountdown() {
     const now = new Date();
-    let diff = valentinstag - now;
-
-    if (diff < 0) {
-        valentinstag.setFullYear(valentinstag.getFullYear() + 1);
-        diff = valentinstag - now;
-    }
+    const valentinstag = getNextValentinstag();
+    const diff = valentinstag - now;
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -79,6 +87,10 @@ function updateCountdown() {
     countdownElement.textContent =
         `${days} Tage ${hours} Stunden ${minutes} Minuten ${seconds} Sekunden`;
 }
+
+// Update jede Sekunde
+setInterval(updateCountdown, 1000);
+updateCountdown(); // sofort starten
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
@@ -174,6 +186,7 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
 
