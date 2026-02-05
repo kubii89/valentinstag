@@ -58,7 +58,30 @@ no.addEventListener("touchstart", e => { e.preventDefault(); flee(e); });
 
 // Optional: Button springt auch, wenn Maus sich nähert
 document.addEventListener("mousemove", flee);
+//Countdown für Valentinstag
+const countdownElement = document.getElementById('countdown');
+const valentinstag = new Date(new Date().getFullYear(), 1, 14);
 
+function updateCountdown() {
+    const now = new Date();
+    let diff = valentinstag - now;
+
+    if (diff < 0) {
+        valentinstag.setFullYear(valentinstag.getFullYear() + 1);
+        diff = valentinstag - now;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    countdownElement.textContent =
+        `${days} Tage ${hours} Stunden ${minutes} Minuten ${seconds} Sekunden`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
 /* ===== Hintergrund-Herzen ===== */
 setInterval(()=>{
   const h = document.createElement("div");
@@ -151,6 +174,7 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
 
