@@ -91,16 +91,46 @@ function startLove(){
   msg.style.flexDirection = "column";
   msg.style.justifyContent = "center";
   msg.style.alignItems = "center";
-  msg.innerHTML=`
+  msg.style.textAlign = "center";
+
+  // Name abfragen
+  let name = prompt("Wie heißt du? 💖", "Elif");
+  if(!name) name = "Elif";
+
+  // personalisierte Nachricht
+  const text = `💖 JAAAA! ${name}, du bist mein Valentinstag 😍💘`;
+
+  // WhatsApp-Link (keine Nummer nötig)
+  const waLink = "https://wa.me/?text=" + encodeURIComponent(text);
+
+  msg.innerHTML = `
     <h1 style="color:#ff4d6d;font-size:3em">
-      JAAAA 😍💖<br>Elif, du bist mein Valentinstag!
+      JAAAA 😍💖
     </h1>
-    <p style="font-size:1.5em">Ich liebe dich 🥰</p>
+    <p style="font-size:1.5em;margin-bottom:30px">
+      Willst du mir das per WhatsApp bestätigen? 🥰
+    </p>
+    <a href="${waLink}" target="_blank"
+       style="
+         background:#25D366;
+         color:white;
+         padding:16px 30px;
+         border-radius:30px;
+         font-size:20px;
+         text-decoration:none;
+         font-weight:bold;
+       ">
+       💬 Bestätigen via WhatsApp
+    </a>
   `;
+
   document.body.appendChild(msg);
 
+  // Feuerwerk starten
   setInterval(firework,700);
+
 }
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
