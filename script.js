@@ -94,7 +94,7 @@ function startLove(){
   msg.style.textAlign = "center";
 
   // Name abfragen
-  let name = prompt("Wie heißt du? 💖", "Elif");
+  let name = prompt("Wie heißt dein Schatziiiiiiii? 💖");
   if(!name) name = "Kubi";
 
   // personalisierte Nachricht
@@ -133,5 +133,6 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
