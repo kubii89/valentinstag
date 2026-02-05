@@ -36,37 +36,6 @@ function flee(e) {
   } while (Math.hypot(x - cursorX, y - cursorY) < 150 && tries < 100);
 
   no.textContent = texts[n++ % texts.length];
-// Countdown bis Valentinstag
-const countdownEl = document.createElement("p");
-countdownEl.style.fontSize = "1.5em";
-countdownEl.style.color = "#ff4d6d";
-countdownEl.style.marginTop = "20px";
-countdownEl.style.textAlign = "center";
-document.body.appendChild(countdownEl);
-
-function updateValentineCountdown() {
-  const now = new Date();
-  let year = now.getFullYear();
-  const valentines = new Date(`February 14, ${year} 00:00:00`);
-
-  // Falls Valentinstag dieses Jahr schon vorbei ist, nächstes Jahr
-  if (now > valentines) {
-    valentines.setFullYear(year + 1);
-  }
-
-  const diff = valentines - now; // in ms
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  countdownEl.textContent = `Noch ${days} Tage, ${hours} Stunden, ${minutes} Minuten und ${seconds} Sekunden bis Valentinstag 💖`;
-}
-
-// Update jede Sekunde
-setInterval(updateValentineCountdown, 1000);
-updateValentineCountdown(); // sofort anzeigen
 
   // sanftes Verschieben + Zittern
   no.style.transition = "all 0.2s ease";
@@ -182,6 +151,7 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
 
 
