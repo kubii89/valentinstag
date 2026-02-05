@@ -95,7 +95,7 @@ function startLove(){
 
   // Name abfragen
   let name = prompt("Wie heißt du? 💖", "Elif");
-  if(!name) name = "Elif";
+  if(!name) name = "Kubi";
 
   // personalisierte Nachricht
   const text = `💖 JAAAA! ${name}, du bist mein Valentinstag 😍💘`;
@@ -133,4 +133,5 @@ function startLove(){
 
 yes.addEventListener("click", startLove);
 yes.addEventListener("touchstart", e => { e.preventDefault(); startLove(); });
+
 
